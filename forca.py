@@ -1,10 +1,10 @@
 
 def pedir_jogada():
-    jogada = input('Tente uma letra ou a palavra chave > ')
+    jogada = input('Tente uma letra ou a palavra chave > ').upper()
     return jogada
 
 def verificador(tentativa):
-    if tentativa == '':
+    if tentativa == '' or type(tentativa) != str:
         validado = False
         return validado
     elif len(tentativa) > 1:
@@ -24,32 +24,29 @@ def tentativa_keyword(tentativa, keyword, continuar):
         continuar = True
         return continuar
 
-def jogada_valida(tentativa, realizado_antes, keyword):
-    if tentativa in keyWord:
-        print()
-    if tentativa in realizado_antes:
-        print(f'A letra "{tentativa}" já foi tentada antes, tente novamente')
-        print(realizado_antes)
-    else:
-        realizado_antes = realizado_antes.append(tentativa)
-        
-        print(realizado_antes)
+def tentativa_letra(tentativa, realizado_ant, chave, certas):
+    if tentativa in chave:
+        realizado_ant = realizado_ant.append(tentativa)
+        certas = certas.append(tentativa)
+        print(realizado_ant)
+        print(certas)
 
-keyWord = input('Digite a palavra chave > ')
+
+
+keyWord = input('Digite a palavra chave > ').upper()
 continue_game = True
-jogadas_realizdas = []
+realizado_antes = []
+letras_certas = []
 
 while continue_game == True:
     jogada = pedir_jogada()
     verificado = verificador(jogada)
-
     if verificado == False:
         print('Jogada inválida')
-        jogada = pedir_jogada()
     elif verificado == 'Chute':
         continue_game = tentativa_keyword(jogada, keyWord, continue_game)
     elif verificado == True:
-        jogada_validada = jogada_valida(jogada, jogadas_realizdas, keyWord)
+        jogada_validada = tentativa_letra(jogada, realizado_antes, keyWord, letras_certas)
     
 
 
