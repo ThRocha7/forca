@@ -1,11 +1,14 @@
-def mostrar_forca(chave, tentativa):
+def mostrar_forca(chave, tentativa): #vai printar a forca, os erros, acertos e as tentativas
     forca = {
-    'nv1': '------------',
-    'nv2': '|',
-    'nv3': '|',
-    'nv4': '|',
-    'nv5': '|',
-    'nv6': 'palavra chave: '
+        'espaco': '',
+        'nv0': 'Já usado:',
+        'espaco2': '',
+        'nv1': '------------',
+        'nv2': '|',
+        'nv3': '|',
+        'nv4': '|',
+        'nv5': '|',
+        'nv6': 'palavra chave: '
     }
     
     if tentativa == '':
