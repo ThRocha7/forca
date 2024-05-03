@@ -1,4 +1,4 @@
-def mostrar_forca(chave, tentativa): #vai printar a forca, os erros, acertos e as tentativas
+def mostrar_forca(chave, tentativa, erros): #vai printar a forca, os erros, acertos e as tentativas
     forca = {
         'espaco': '',
         'nv0': 'Já usado:',
@@ -8,32 +8,27 @@ def mostrar_forca(chave, tentativa): #vai printar a forca, os erros, acertos e a
         'nv3': '|',
         'nv4': '|',
         'nv5': '|',
-        'nv6': 'palavra chave: '
+        'nv6': 'palavra chave:',
+        'nv7': ''.join(['_']*len(chave))
     }
-    
-    if tentativa == '':
-        forca['nv6'] += ''.join(['_']*len(chave))
-    else: forca['nv6'] = modificar_nv6(chave, forca, tentativa)
 
+
+    forca['nv7'] = modificar_nv7(chave, forca, tentativa)
     for i in forca:
         print(forca[i])
 
-def modificar_nv6(chave, forca, tentativa):
+def modificar_nv7(chave, forca, tentativa):
     posicoes = []
     qntd_letras = len(chave)
+    forca
     
     if tentativa in chave:
         for i in range(len(chave)):
             if chave[i] == tentativa:
                 posicoes.append(i)
     # for posicao in posicoes:
-    #     for 
-# def mostrar(tentativa, certas):
-#     if tentativa == 'certo':
-#         # print(f'A letra {tentativa} está certa. {certas}')
-#     elif tentativa == 'errado':
-#         print(f'A letra {tentativa} não faz parte da palavra chave')
-    
+    #     for  
+
 def pedir_jogada():
     jogada = input('Tente uma letra ou a palavra chave > ').upper()
     return jogada
@@ -70,9 +65,10 @@ continue_game = True
 jogadas_realizadas = []
 jogadas_certas = []
 jogada = ''
+erros = 0
 
 while continue_game == True:
-    mostrar_forca(keyWord, jogada)
+    mostrar_forca(keyWord, jogada, erros)
     jogada = pedir_jogada()
     verificado = verificador(jogada)
     if verificado == False:
