@@ -1,15 +1,15 @@
 def mostrar_forca(chave, tentativa, erros): #vai printar a forca, os erros, acertos e as tentativas
     forca = {
-        'espaco': '',
-        'nv0': 'Já usado:',
-        'espaco2': '',
+        # 'espaco': '',
+        # 'nv0': 'Já usado:',
+        # 'espaco2': '',
         'nv1': '------------',
         'nv2': '|',
         'nv3': '|',
         'nv4': '|',
         'nv5': '|',
         'nv6': 'palavra chave:',
-        'nv7': ''.join(['_']*len(chave))
+        'nv7': ['_'] * len(chave)
     }
 
 
@@ -19,15 +19,19 @@ def mostrar_forca(chave, tentativa, erros): #vai printar a forca, os erros, acer
 
 def modificar_nv7(chave, forca, tentativa):
     posicoes = []
-    qntd_letras = len(chave)
-    forca
     
-    if tentativa in chave:
+    if tentativa == '':
+        return ''.join(forca['nv7'])
+    
+    elif tentativa in chave:
         for i in range(len(chave)):
             if chave[i] == tentativa:
                 posicoes.append(i)
-    # for posicao in posicoes:
-    #     for  
+                forca['nv7'][i] = tentativa
+    ant = forca['nv7']
+    print(forca['nv7'], ant)         
+    return ''.join(forca['nv7'])
+         
 
 def pedir_jogada():
     jogada = input('Tente uma letra ou a palavra chave > ').upper()
