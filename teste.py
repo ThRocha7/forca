@@ -75,7 +75,9 @@ print(posicoes)
 if ei in key:
     for posicao in posicoes:
         escondido[posicao] = ei
-print(''.join(escondido))
+td = []
+tq = td.append(escondido)
+print(''.join(td))
 
 # forca = {
 #     'nv': ''.join(['-']*3)

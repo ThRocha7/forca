@@ -1,4 +1,4 @@
-def mostrar_forca(chave, tentativa, erros): #vai printar a forca, os erros, acertos e as tentativas
+def mostrar_forca(chave, tentativa, erros, visualizar): #vai printar a forca, os erros, acertos e as tentativas
     forca = {
         # 'espaco': '',
         # 'nv0': 'Já usado:',
@@ -9,28 +9,25 @@ def mostrar_forca(chave, tentativa, erros): #vai printar a forca, os erros, acer
         'nv4': '|',
         'nv5': '|',
         'nv6': 'palavra chave:',
-        'nv7': ['_'] * len(chave)
+        'nv7':  modificar_nv7(chave, tentativa)
     }
-
-
-    forca['nv7'] = modificar_nv7(chave, forca, tentativa)
+    
     for i in forca:
         print(forca[i])
 
-def modificar_nv7(chave, forca, tentativa):
+def modificar_nv7(chave, tentativa):
     posicoes = []
+    visualizador_chave = ['_']*len(chave)
     
     if tentativa == '':
-        return ''.join(forca['nv7'])
+        return ''.join(visualizador_chave)
     
     elif tentativa in chave:
         for i in range(len(chave)):
             if chave[i] == tentativa:
                 posicoes.append(i)
-                forca['nv7'][i] = tentativa
-    ant = forca['nv7']
-    print(forca['nv7'], ant)         
-    return ''.join(forca['nv7'])
+                visualizador_chave[i] = tentativa
+    return ''.join(visualizador_chave)
          
 
 def pedir_jogada():
@@ -50,7 +47,7 @@ def tentativa_final(tentativa, keyword, continuar):
         print("Errou tente novamente")
         return True
 
-def caminho_tentativa(tentativa, realizadas, certas, chave):
+def caminho_tentativa(tentativa, realizadas, certas, chave, errado):
     if len(tentativa) > 1:
         return 'final'
     else:
@@ -70,15 +67,16 @@ jogadas_realizadas = []
 jogadas_certas = []
 jogada = ''
 erros = 0
+visualizador_chave = ['_']*len(keyWord)
 
 while continue_game == True:
-    mostrar_forca(keyWord, jogada, erros)
+    mostrar_forca(keyWord, jogada, erros, visualizador_chave)
     jogada = pedir_jogada()
     verificado = verificador(jogada)
     if verificado == False:
         print('Jogada inválida')
     else: 
-        tentativa = caminho_tentativa(jogada, jogadas_realizadas, jogadas_certas, keyWord)
+        tentativa = caminho_tentativa(jogada, jogadas_realizadas, jogadas_certas, keyWord, erros)
         if tentativa == 'final':
             continue_game = tentativa_final(jogada, keyWord, continue_game)
         # else:
